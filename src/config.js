@@ -1,0 +1,1 @@
+export const ajaxUrl = 'https://api.github.com/graphql';
