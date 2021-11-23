@@ -26,7 +26,7 @@ const UserSearchForm = ({}) => {
 
   return (
 		<div className="flex flex-col">
-			<div className="flex justify-center">
+			<div className="flex justify-center items-center">
 				<InputField
 					className="border-solid border-2 border-black mr-3"
 					placeholder="Search Users..."
@@ -34,7 +34,7 @@ const UserSearchForm = ({}) => {
 					onKeyDown={handleKeyDown}
 				/>
 				<Button
-					className="border-gray-400 p-1"
+					className="border-gray-400 p-1 h-8"
 					onClick={handleSubmit}
 				>
 					Search

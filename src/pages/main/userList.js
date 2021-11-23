@@ -72,13 +72,16 @@ const UserList = () => {
 				{userList && userList.slice(currentPage * 5, (currentPage + 1) * 5).map(user => (
 					<div
 						key={user.cursor}
-						className={`${currentUser && currentUser?.node?.login === user?.node?.login ? "border-blue-300 border-2" : ''}`}
+						className={`flex flex-col items-center ${currentUser && currentUser?.node?.login === user?.node?.login ? "border-blue-300 border-2" : ''}`}
 					>
 						<img
 							className="w-32 h-32 m-2 border rounded-md shadow-md cursor-pointer"
 							onClick={() => handleUserSelect(user)}
 							src={user.node.avatarUrl} alt={user.node.email}
 						/>
+						<label>
+							{user.node.name}
+						</label>
 					</div>
 				))}
 				{isLoading && <LoadingScreen />}
@@ -96,7 +99,7 @@ const UserList = () => {
 							<label>{repository.name}</label>
 							<div>
 								<label>{repository.stargazers.totalCount} stars / </label>
-								<label>{repository.watchers.totalCount} watchers</label>
+								<label>{repository.watchers.totalCount} watching</label>
 							</div>
 						</li>
 					))}
