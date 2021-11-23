@@ -40,19 +40,28 @@ const RepositoryDetail = ({ goback }) => {
 					</Button>
 				</div>
 			</div>
-			{issueList && <ul className="border shadow-sm rounded mt-4 min-h-300 overflow-x-hidden max-h-500 overflow-y-scroll">
-				{issueList.map((issue, idx) => (
-					<li
-						className="hover:bg-blue-400 p-2"
-						key={`issue_${idx}`}
-					>
-						<div className="flex">
-							<label className="font-bold mr-3">{issue.title}</label>
-							<label>{issue.body}</label>
-						</div>
-					</li>
-				))}
-			</ul>}
+			
+			{issueList && <table className="border shadow-sm rounded mt-4 min-h-300 overflow-x-hidden max-h-500 overflow-y-scroll w-full">
+				<thead className="bg-gray-200 max-h-20">
+					<tr>
+						<td className="max-h-20">Issue</td>
+						<td className="max-h-20">Description</td>
+					</tr>
+				</thead>
+				<tbody>
+					{issueList.map((issue, idx) => (
+						<tr
+							className="hover:bg-blue-400 p-2"
+							key={`issue_${idx}`}
+						>
+							{/* <div className="flex"> */}
+								<td className="font-bold mr-3">{issue.title}</td>
+								<td>{issue.body}</td>
+							{/* </div> */}
+						</tr>
+					))}
+				</tbody>
+			</table>}
 		</div>
 	)
 };
