@@ -46,7 +46,7 @@ const RepositoryDetail = ({ goback }) => {
 					<thead className="bg-gray-200 max-h-20">
 						<tr>
 							<td className="max-h-20 ">Issue</td>
-							<td className="max-h-20">Description</td>
+							<td className="max-h-20 w-full">Description</td>
 						</tr>
 					</thead>
 					<tbody>
