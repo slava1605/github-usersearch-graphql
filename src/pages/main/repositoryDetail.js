@@ -5,6 +5,23 @@ import { ReactComponent as LeftIcon } from '../../icons/left.svg';
 import CreateNewIssueDialog from "./createNewIssueDialog";
 import Button from "../../components/button";
 
+const calcDate = (t) => {
+	const today = new Date();
+	const createdAt = new Date(t);
+	const passed = today - createdAt;
+	if (passed < 3600000) {
+		return `${Math.floor(passed / 60000)} minutes ago`;
+	} else if (passed < 3600000 * 24) {
+		return `${Math.floor(passed / 3600000)} hours ago`;
+	} else if (passed < 3600000 * 24 * 30) {
+		return `${Math.floor(passed / 3600000 / 24)} days ago`;
+	} else if (passed < 3600000 * 24 * 365) {
+		return `${Math.floor(passed / 3600000 / 24 / 30 )} months ago`;
+	} else {
+		return `${Math.floor(passed / 3600000 / 24 / 365 )} years ago`;
+	}
+};
+
 const RepositoryDetail = ({ goback }) => {
 	const { currentRepository, currentUser, issueList } = useSelector(state => state.userList);
 	const dispatch = useDispatch();
@@ -46,7 +63,9 @@ const RepositoryDetail = ({ goback }) => {
 					<thead className="bg-gray-200 max-h-20">
 						<tr>
 							<td className="max-h-20 ">Issue</td>
-							<td className="max-h-20 w-full">Description</td>
+							<td className="max-h-20">Description</td>
+							<td className="max-h-20">CreateAt</td>
+							{/* <td className="max-h-20">Author</td> */}
 						</tr>
 					</thead>
 					<tbody>
@@ -58,6 +77,8 @@ const RepositoryDetail = ({ goback }) => {
 								{/* <div className="flex"> */}
 									<td className="font-bold mr-3 max-w-200">{issue.title}</td>
 									<td className="overflow-clip">{issue.body}</td>
+									<td className="">created {calcDate(issue.createdAt)} by {issue.author.login}</td>
+									{/* <td className="">{}</td> */}
 								{/* </div> */}
 							</tr>
 						))}

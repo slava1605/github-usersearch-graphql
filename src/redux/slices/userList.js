@@ -180,6 +180,10 @@ export function getIssueList(owner, name) {
 					body
 					state
 					url
+					createdAt
+					author {
+						login
+					}
 					comments(first:2){
 						nodes{
 							url
