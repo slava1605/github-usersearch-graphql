@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from '../../redux/store';
 import { searchUsers } from '../../redux/slices/userList';
+import InputField from '../../components/inputField';
+import Button from '../../components/button';
 
 const UserSearchForm = ({}) => {
 	const { userList, isLoading, error } = useSelector(state => state.userList);
@@ -25,18 +27,18 @@ const UserSearchForm = ({}) => {
   return (
 		<div className="flex flex-col">
 			<div className="flex justify-center">
-				<input
-					className="border-solid border-2 rounded-md border-black mr-3"
+				<InputField
+					className="border-solid border-2 border-black mr-3"
 					placeholder="Search Users..."
 					onChange={handleChange}
 					onKeyDown={handleKeyDown}
 				/>
-				<button
-					className="border-solid border rounded-md border-gray-400 shadow-md p-1"
+				<Button
+					className="border-gray-400 p-1"
 					onClick={handleSubmit}
 				>
 					Search
-				</button>
+				</Button>
 			</div>
 			{/* {error && <div className="text-red-400">
 				<p>Search Error</p>
