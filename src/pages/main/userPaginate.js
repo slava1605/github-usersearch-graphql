@@ -8,7 +8,10 @@ const UserPaginate = ({
 	handlePageSelect,
 	handleNextPage,
 	paginated,
-	currentPage
+	currentPage,
+	endPage,
+	isEndPage,
+	isFirstPage,
 }) => {
   return (
 		<div className="flex items-center">
@@ -27,6 +30,15 @@ const UserPaginate = ({
 					{idx + 1}
 				</Button>
 			))}
+			{isEndPage && (
+				<Button
+					key={endPage - 1}
+					onClick={() => handlePageSelect(endPage - 1)}
+					className={`w-8 h-8 text-center w-auto ${currentPage === endPage - 1 ? "bg-blue-400" : ''}`}
+				>
+					{endPage}
+				</Button>
+			)}
 			<Button
 				className="w-8 h-8 p-1"
 				onClick={handleNextPage}

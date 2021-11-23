@@ -37,7 +37,8 @@ const UserList = () => {
 	};
 
 	const handleNextPage = () => {
-		if (currentPage < endPage - 1) {
+		const _endPage = endPage < 10 ? endPage : 9;
+		if (currentPage < _endPage) {
 			setCurrentPage(currentPage + 1);
 		}
 		setIsDetailShow(false);
@@ -55,7 +56,6 @@ const UserList = () => {
 
 	const handleCurrentRepository = async (repo) => {
 		await dispatch(setCurrentRepository(repo));
-		console.log(repo);
 		await dispatch(getIssueList(currentUser?.node?.login, repo?.name));
 		setIsDetailShow(true);
 	};
@@ -68,7 +68,7 @@ const UserList = () => {
 				</label>
 			</div>
 			<div className="flex items-center pt-2 w-100">
-				{userList && userList.slice(currentPage, currentPage + 5).map(user => (
+				{userList && userList.slice(currentPage * 5, (currentPage + 1) * 5).map(user => (
 					<div
 						key={user.cursor}
 						className={`${currentUser && currentUser?.node?.login === user?.node?.login ? "border-blue-300 border-2" : ''}`}
@@ -107,7 +107,9 @@ const UserList = () => {
 				handleNextPage={handleNextPage}
 				handlePageSelect={handlePageSelect}
 				currentPage={currentPage}
-				endPage={endPage}
+				endPage={endPage > 9 ? 9 : endPage}
+				isEndPage={/*endPage > 9*/ false}
+				isFirstPage={currentPage > 9}
 			/>
 		</div>
 	)
