@@ -4,6 +4,7 @@ import { getRepositories, setCurrentUser, setCurrentRepository, getIssueList } f
 import RepositoryDetail from "./repositoryDetail";
 import UserPaginate from "./userPaginate";
 import Button from "../../components/button";
+import LoadingScreen from "../../components/loadingScreen";
 
 const UserList = () => {
 	const { totalUser, userList, repositories, currentUser, currentRepository, isLoading, error }
@@ -67,7 +68,7 @@ const UserList = () => {
 					{totalUser} Users
 				</label>
 			</div>
-			<div className="flex items-center pt-2 w-100">
+			<div className="flex items-center pt-2 w-100 relative">
 				{userList && userList.slice(currentPage * 5, (currentPage + 1) * 5).map(user => (
 					<div
 						key={user.cursor}
@@ -80,11 +81,12 @@ const UserList = () => {
 						/>
 					</div>
 				))}
+				{isLoading && <LoadingScreen />}
 			</div>
 
-			{!isDetailShow && <div className="w-2/3 m-10">
+			{!isDetailShow && <div className="w-2/3 m-10 h-auto">
 				<label>{repositories.length} Repositories</label>
-				<ul className="h-60 max-h-60 overflow-y-scroll p-5 border mt-2 rounded">
+				<ul className={`relative h-60 max-h-60 p-5 border mt-2 rounded ${!isLoading?"overflow-y-scroll":"overflow-hidden"}`}>
 					{repositories && repositories.map((repository, idx) => (
 						<li
 							key={`repository_${idx}`}
@@ -98,6 +100,7 @@ const UserList = () => {
 							</div>
 						</li>
 					))}
+					{isLoading && <LoadingScreen />}
 				</ul>
 			</div>}
 			{isDetailShow && <RepositoryDetail goback={() => setIsDetailShow(false)} />}
