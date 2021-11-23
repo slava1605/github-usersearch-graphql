@@ -14,6 +14,7 @@ const initialState = {
 	currentUser: null,
 	currentRepository: null,
 	issueList: [],
+	totalUser: 0,
 };
 
 const slice = createSlice({
@@ -34,7 +35,8 @@ const slice = createSlice({
     // GET USERS
     getUserListSuccess(state, action) {
       state.isLoading = false;
-      state.userList = action.payload;
+      state.userList = action.payload.current;
+			state.totalUser = action.payload.total;
     },
 
 		getRepositoriesSuccess(state, action) {
@@ -110,7 +112,11 @@ export function searchUsers(searchKey, after) {
 					}
 				},
 			);
-      dispatch(slice.actions.getUserListSuccess(response.data.data.search.edges));
+			console.log(response);
+      dispatch(slice.actions.getUserListSuccess({
+				current: response.data.data.search.edges,
+				total: response.data.data.search.userCount
+			}));
     } catch (error) {
       dispatch(slice.actions.hasError(error))
     }
@@ -168,7 +174,7 @@ export function getIssueList(owner, name) {
 		repository(owner: "${owner}", name: "${name}") {
 			description
 			url
-			issues(states:[OPEN,CLOSED], first:100){
+			issues(states:[OPEN], first:100){
 				nodes{
 					title
 					body
@@ -196,7 +202,7 @@ export function getIssueList(owner, name) {
 					title
 					description
 					url
-					issues(states:[OPEN,CLOSED], first:2){
+					issues(states:[OPEN], first:2){
 						nodes{
 							title
 							state

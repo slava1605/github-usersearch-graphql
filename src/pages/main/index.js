@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import UserSearchForm from "../components/userSearchForm";
-import UserList from "../components/userList";
+import UserSearchForm from "./userSearchForm";
+import UserList from "./userList";
 
 const Main = ({}) => {
   return (

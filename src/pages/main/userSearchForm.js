@@ -1,11 +1,11 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from '../redux/store';
-import { searchUsers } from '../redux/slices/userList';
+import { useDispatch, useSelector } from '../../redux/store';
+import { searchUsers } from '../../redux/slices/userList';
 
 const UserSearchForm = ({}) => {
 	const { userList, isLoading, error } = useSelector(state => state.userList);
 	const dispatch = useDispatch();
-	const [key, setKey] = useState('slava1605');
+	const [key, setKey] = useState('');
 
 	const handleChange = (e) => {
 		setKey(e.target.value);

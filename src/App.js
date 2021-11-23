@@ -1,7 +1,7 @@
 import logo from './logo.svg';
 import './App.css';
 import React, { Component } from "react";
-import Main from "./pages/main";
+import Main from "./pages/main/index";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 class App extends Component {
